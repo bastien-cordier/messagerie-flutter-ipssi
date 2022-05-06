@@ -68,25 +68,28 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // pas le temps d'implementer la création d'une conversation
+
   Widget bodyPage() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Inscription"),
-            Switch(
-                value: selected,
-                onChanged: (value) {
-                  setState(() {
-                    selected = value;
-                  });
-                }),
-            const Text("Connexion"),
-          ],
-        ),
-        (selected) ? Connexion() : Inscription()
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     const Text("Inscription"),
+        //     Switch(
+        //         value: selected,
+        //         onChanged: (value) {
+        //           setState(() {
+        //             selected = value;
+        //           });
+        //         }),
+        //     const Text("Connexion"),
+        //   ],
+        // ),
+        // (selected) ? Connexion() : Inscription(),
+        Connexion()
       ],
     );
   }

@@ -63,7 +63,7 @@ class AllConversationsState extends State<AllConversations>{
                 }
                 return Card(
                   elevation: 5.0,
-                  color: Colors.amber,
+                  color: Color(0xFF33B5FF),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   child: ListTile(
                     onTap: (){
@@ -73,10 +73,7 @@ class AllConversationsState extends State<AllConversations>{
                           }
                       ));
                     },
-                    //Image
-                    // leading: ImageRond(image: users.image,size:60),
                     title: Text(title),
-                    // subtitle: Text("${users.mail}"),
                   ),
                 );
             }
