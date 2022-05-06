@@ -58,6 +58,9 @@ class AllConversationsState extends State<AllConversations>{
             itemCount: documents.length,
             itemBuilder: (context,index){
                 String title = documents[index].firstUser.uid == FirestoreHelper().getCurrentUserId() ? documents[index].secondUser.prenom : documents[index].firstUser.prenom;
+                if(documents[index].firstUser == null || documents[index].secondUser == null){
+                  return Container();
+                }
                 return Card(
                   elevation: 5.0,
                   color: Colors.amber,

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:messagerie_ipssi/Model/Conversation.dart';
+import 'package:messagerie_ipssi/Model/Utilisateur.dart';
+import 'package:messagerie_ipssi/modelView/TextFieldZone.dart';
 
 class ConversationChamps extends StatelessWidget {
 
-  ConversationChamps({
-    Key? key,
-  }) : super(key: key);
+  ConversationChamps(Conversation this.conversation);
+  Conversation conversation;
 
   @override
   Widget build(BuildContext context) {
+    String text = "";
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 20.0,
@@ -26,7 +29,6 @@ class ConversationChamps extends StatelessWidget {
       child: SafeArea(
         child: Row(
           children: [
-            SizedBox(width: 20.0),
             Expanded(
               child: Container(
                 padding: EdgeInsets.symmetric(
@@ -35,23 +37,12 @@ class ConversationChamps extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Type message",
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: TextFieldZone(conversation)
                 ),
               ),
-            ),
-          ],
+            ],
+          )
         ),
-      ),
-    );
+      );
   }
 }

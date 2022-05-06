@@ -79,22 +79,27 @@ class FirestoreHelper {
   }
 
   // envoyer des messages
-  sendMessage(String texte, Utilisateur user, Utilisateur moi){
+  sendMessage(String texte, Utilisateur? user, Utilisateur? moi, Conversation conversation){
+    if(user == null || moi == null){
+      return ;
+    }
     DateTime date = DateTime.now();
     Map <String, dynamic>map = {
-      'from': moi.uid,
-      'to': user.uid,
-      'texte': texte,
-      'envoieMessage': date
+      'FROM': moi.uid,
+      'TO': user.uid,
+      'TEXTE': texte,
+      'ENVOIE_MESSAGE': date,
+      'CONVERSATION': conversation.uid
     };
+    print(map);
 
     String idDate = date.microsecondsSinceEpoch.toString();
 
     addMessage(map, getMessageRef(moi.uid, user.uid, idDate));
-
-    addConversation(getConversation(moi.uid, user, texte, date), moi.uid);
-
-    addConversation(getConversation(moi.uid, moi, texte, date), user.uid);
+    //
+    // addConversation(getConversation(moi.uid, user, texte, date), moi.uid);
+    //
+    // addConversation(getConversation(moi.uid, moi, texte, date), user.uid);
   }
 
   Map<String, dynamic> getConversation(String sender, Utilisateur partenaire, String texte, DateTime date){
@@ -119,6 +124,7 @@ class FirestoreHelper {
   }
 
   addMessage(Map<String,dynamic> map,String uid){
+    print(map);
     fireMessage.doc(uid).set(map);
   }
   addConversation(Map<String,dynamic> map,String uid){

@@ -4,6 +4,7 @@ import 'package:messagerie_ipssi/Fonctions/FirestoreHelper.dart';
 import 'package:messagerie_ipssi/Model/Conversation.dart';
 import 'package:messagerie_ipssi/Model/Message.dart';
 import 'package:messagerie_ipssi/Model/MessageBubble.dart';
+import 'package:messagerie_ipssi/Model/Utilisateur.dart';
 import 'package:messagerie_ipssi/modelView/ConversationChamps.dart';
 
 
@@ -11,7 +12,6 @@ import 'package:messagerie_ipssi/modelView/ConversationChamps.dart';
 class detailConversation extends StatelessWidget {
 
   Conversation conversation;
-
   detailConversation({required Conversation this.conversation});
 
   @override
@@ -23,10 +23,7 @@ class detailConversation extends StatelessWidget {
   }
 
   AppBar buildAppBar() {
-    String? title = conversation.firstUser?.uid ==
-        FirestoreHelper().getCurrentUserId()
-        ? conversation.secondUser?.prenom
-        : conversation.firstUser?.prenom;
+    String? title = conversation.firstUser?.uid != FirestoreHelper().getCurrentUserId() ? conversation.firstUser?.prenom : conversation.secondUser?.prenom;
 
     return AppBar(
       automaticallyImplyLeading: false,
@@ -58,8 +55,8 @@ class detailConversation extends StatelessWidget {
           if (!snapshot.hasData) {
             return const CircularProgressIndicator();
           }
-          List documents = snapshot.data!.docs;
-          print(documents);
+          List documents = SortMessage(snapshot.data!.docs);
+
           return Column(
             children: [
               Expanded(
@@ -79,10 +76,23 @@ class detailConversation extends StatelessWidget {
                   ),
                 ),
               ),
-              ConversationChamps(),
+              ConversationChamps(conversation),
             ],
           );
         }
     );
+  }
+
+  SortMessage(messages){
+    if(messages == null) {
+      return [];
+    }
+
+    messages.sort((a, b) {
+      Message messageA = Message(a);
+      Message messageB = Message(b);
+      return messageA.envoiMessage.compareTo(messageB.envoiMessage);
+    });
+    return messages;
   }
 }
