@@ -3,7 +3,7 @@ import 'package:messagerie_ipssi/Model/Conversation.dart';
 
 class detailConversation extends StatefulWidget{
   Conversation conversation;
-  detailConversation({required Conversation this.conversation});
+  detailConversation({required this.conversation});
 
   @override
   State<StatefulWidget> createState() {
@@ -29,13 +29,18 @@ class detailConversationState extends State<detailConversation>{
           elevation: 5.0,
           color: Colors.amber,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: ListTile(
+          child: const ListTile(
             //Image
             // leading: ImageRond(image: users.image,size:60),
             title: Text("YO"),
             // subtitle: Text("${users.mail}"),
           ),
-        )
+          
+        ),
+        Flexible(
+          child: ZoneText(
+            text: "Yo",
+          ),),
       ],
     );
   }

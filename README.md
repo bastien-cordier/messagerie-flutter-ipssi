@@ -1,4 +1,4 @@
-# messagerie_ipssi
+# messagerie_ipssi - Groupe Markcley INZA-CRUZ & Bastien CORDIER
 
 A new Flutter project.
 
