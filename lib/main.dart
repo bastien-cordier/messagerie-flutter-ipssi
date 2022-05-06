@@ -6,11 +6,10 @@ import 'package:messagerie_ipssi/Controller/inscription.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if ((defaultTargetPlatform == TargetPlatform.iOS) || (defaultTargetPlatform == TargetPlatform.android)){
+  if ((defaultTargetPlatform == TargetPlatform.iOS) ||
+      (defaultTargetPlatform == TargetPlatform.android)) {
     await Firebase.initializeApp();
-  }
-  else
-  {
+  } else {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
             apiKey: "AIzaSyCDnj0hLTn-07p9HyZsTv53gEgJLLlNVt0",
@@ -18,9 +17,7 @@ void main() async {
             projectId: "ipssi-messagerie",
             storageBucket: "ipssi-messagerie.appspot.com",
             messagingSenderId: "505804800647",
-            appId: "1:505804800647:web:ec819357305d7b3991ee22"
-        )
-    );
+            appId: "1:505804800647:web:ec819357305d7b3991ee22"));
   }
   runApp(const MyApp());
 }
@@ -34,7 +31,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       debugShowCheckedModeBanner: false,
