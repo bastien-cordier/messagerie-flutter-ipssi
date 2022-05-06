@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:messagerie_ipssi/Controller/connexion.dart';
 import 'package:messagerie_ipssi/Controller/inscription.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  if ((defaultTargetPlatform == TargetPlatform.iOS) || (defaultTargetPlatform == TargetPlatform.android)){
+    await Firebase.initializeApp();
+  }
+  else
+  {
+    await Firebase.initializeApp(
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyCDnj0hLTn-07p9HyZsTv53gEgJLLlNVt0",
+            authDomain: "ipssi-messagerie.firebaseapp.com",
+            projectId: "ipssi-messagerie",
+            storageBucket: "ipssi-messagerie.appspot.com",
+            messagingSenderId: "505804800647",
+            appId: "1:505804800647:web:ec819357305d7b3991ee22"
+        )
+    );
+  }
+
+
+
   runApp(const MyApp());
 }
 

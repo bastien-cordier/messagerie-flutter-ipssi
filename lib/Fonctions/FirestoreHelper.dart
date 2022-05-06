@@ -7,7 +7,6 @@ class FirestoreHelper {
   final auth = FirebaseAuth.instance;
   final storage = FirebaseStorage.instance;
   final fireUser = FirebaseFirestore.instance.collection("Utilisateurs");
-  final fireMusic = FirebaseFirestore.instance.collection("Musiques");
 
 
 
@@ -66,12 +65,6 @@ class FirestoreHelper {
     // mise à jour d'un utilisateur dans la base de donnée
     updateUser(String uid,Map<String,dynamic> map){
       fireUser.doc(uid).update(map);
-    }
-
-
-      // ajouter une musique dans la base de donnée
-    addMusic(String uid ,Map<String,dynamic> map){
-      fireMusic.doc(uid).set(map);
     }
 
 

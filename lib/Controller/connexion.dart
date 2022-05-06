@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messagerie_ipssi/Fonctions/FirestoreHelper.dart';
+import 'package:messagerie_ipssi/View/Home.dart';
 
 class Connexion extends StatefulWidget{
   @override
@@ -85,6 +86,15 @@ class ConnexionState extends State<Connexion>{
             onPressed: (){
               // Se connecter
               FirestoreHelper().connect(mail, password).then((value){
+                setState(() {
+                  
+                });
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context){
+                      return Home();
+                    }
+                ));
+
 
               }).catchError((error){
                 Dialogue();
