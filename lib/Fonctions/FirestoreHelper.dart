@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:messagerie_ipssi/Model/Message.dart';
 import 'package:messagerie_ipssi/Model/Utilisateur.dart';
 
 import 'package:messagerie_ipssi/Model/Conversation.dart';
+import 'package:messagerie_ipssi/View/detailConversation.dart';
 
 class FirestoreHelper {
   final auth = FirebaseAuth.instance;
@@ -36,7 +38,25 @@ class FirestoreHelper {
     UserCredential resultat = await auth.signInWithEmailAndPassword(email: mail, password: password);
     String uid = resultat.user!.uid;
     return getProfil(uid);
+  }
 
+  Future<Conversation>? checkConversation(Utilisateur user) async{
+    var querySnapshot = await fireConversation.get().then((event) {
+      for (var doc in event.docs) {
+        if([getCurrentUserId(), user.uid].contains(doc.data()["FIRSTUSER"]) && [getCurrentUserId(), user.uid].contains(doc.data()["SECONDUSER"])){
+          return Conversation(doc);
+        }
+      }
+    });
+    if(querySnapshot == null){
+      Map<String, dynamic> map = {
+        "FIRSTUSER": getCurrentUserId(),
+        "SECONDUSER": user.uid,
+        "LASTMESSAGE": "",
+      };
+      return addConversation(map);
+    };
+    return querySnapshot;
   }
 
   //Fonction a pour de récupérer l'id de l'utisateur qui s'est connecté
@@ -47,9 +67,12 @@ class FirestoreHelper {
   Future<Conversation> generateConversation(DocumentSnapshot snapshot) async {
       Map<String,dynamic> map = snapshot.data() as Map<String,dynamic>;
       Conversation conversation = Conversation(snapshot);
-      Utilisateur first = await FirestoreHelper().getProfil(map["FIRSTUSER"]);
-      Utilisateur last = await FirestoreHelper().getProfil(map["SECONDUSER"]);
-      Message lastMessage = await FirestoreHelper().getMessage(map["LASTMESSAGE"]);
+      Utilisateur first = await getProfil(map["FIRSTUSER"]);
+      Utilisateur last = await getProfil(map["SECONDUSER"]);
+      Message? lastMessage;
+      if(map["LASTMESSAGE"] != ""){
+        lastMessage = await getMessage(map["LASTMESSAGE"]);
+      }
       conversation.firstUser = first;
       conversation.secondUser = last;
       conversation.lastMessage = lastMessage;
@@ -77,6 +100,9 @@ class FirestoreHelper {
   updateUser(String uid,Map<String,dynamic> map){
     fireUser.doc(uid).update(map);
   }
+  updateConversation(String uid, Map<String,dynamic> map){
+    fireConversation.doc(uid).update(map);
+  }
 
   // envoyer des messages
   sendMessage(String texte, Utilisateur? user, Utilisateur? moi, Conversation conversation){
@@ -96,6 +122,7 @@ class FirestoreHelper {
     String idDate = date.microsecondsSinceEpoch.toString();
 
     addMessage(map, getMessageRef(moi.uid, user.uid, idDate));
+
     //
     // addConversation(getConversation(moi.uid, user, texte, date), moi.uid);
     //
@@ -124,10 +151,9 @@ class FirestoreHelper {
   }
 
   addMessage(Map<String,dynamic> map,String uid){
-    print(map);
     fireMessage.doc(uid).set(map);
   }
-  addConversation(Map<String,dynamic> map,String uid){
-    fireConversation.doc(uid).set(map);
+  addConversation(Map<String,dynamic> map){
+    fireConversation.doc().set(map);
   }
 }

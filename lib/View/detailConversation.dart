@@ -27,6 +27,7 @@ class detailConversation extends StatelessWidget {
 
     return AppBar(
       automaticallyImplyLeading: false,
+      backgroundColor: Color(0xFF4CAF50),
       title: Row(
         children: [
           BackButton(),

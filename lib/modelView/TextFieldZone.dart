@@ -53,7 +53,8 @@ class TextFieldZoneState extends State<TextFieldZone>{
                   _controller.clear;
                 },
                 icon: Icon(
-                    Icons.send
+                    Icons.send,
+                  color: Color(0xFF4CAF50),
                 )
               ),
             ),

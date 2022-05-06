@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       debugShowCheckedModeBanner: false,
@@ -74,22 +74,21 @@ class _MyHomePageState extends State<MyHomePage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     const Text("Inscription"),
-        //     Switch(
-        //         value: selected,
-        //         onChanged: (value) {
-        //           setState(() {
-        //             selected = value;
-        //           });
-        //         }),
-        //     const Text("Connexion"),
-        //   ],
-        // ),
-        // (selected) ? Connexion() : Inscription(),
-        Connexion()
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Inscription"),
+            Switch(
+                value: selected,
+                onChanged: (value) {
+                  setState(() {
+                    selected = value;
+                  });
+                }),
+            const Text("Connexion"),
+          ],
+        ),
+        (selected) ? Connexion() : Inscription(),
       ],
     );
   }
