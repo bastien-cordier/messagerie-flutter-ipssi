@@ -31,6 +31,7 @@ class FirestoreHelper {
   //Connexion d'un utlisateur
   Future <Utilisateur> connect(String mail , String password) async {
     UserCredential resultat = await auth.signInWithEmailAndPassword(email: mail, password: password);
+    print(resultat.user);
     String uid = resultat.user!.uid;
     return getProfil(uid);
 

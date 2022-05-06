@@ -97,6 +97,7 @@ class ConnexionState extends State<Connexion>{
 
 
               }).catchError((error){
+                print(error);
                 Dialogue();
 
               });
