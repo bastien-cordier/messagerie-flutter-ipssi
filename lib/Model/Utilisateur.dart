@@ -14,7 +14,6 @@ class Utilisateur{
   Utilisateur(DocumentSnapshot snapshot){
     _uid = snapshot.id;
     Map<String,dynamic> map = snapshot.data() as Map<String,dynamic>;
-    print(map);
     Timestamp timestamp = map["ISINSCRIPTION"];
     isInscription = timestamp.toDate();
     isConnected = map["ISCONNECTED"];

@@ -10,10 +10,10 @@ class Message {
   Message(DocumentSnapshot snapshot) {
     idMessage = snapshot.id;
     Map<String, dynamic> map = snapshot.data() as Map<String, dynamic>;
-    from = map['from'];
-    to = map['to'];
-    texte = map['texte'];
-    Timestamp timestamp = map["envoiMessage"];
+    from = map['FROM'];
+    to = map['TO'];
+    texte = map['TEXTE'];
+    Timestamp timestamp = map["ENVOIE_MESSAGE"];
     envoiMessage = timestamp.toDate();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messagerie_ipssi/Fonctions/FirestoreHelper.dart';
+import 'package:messagerie_ipssi/View/AllConversations.dart';
 import 'package:messagerie_ipssi/View/Home.dart';
 
 class Connexion extends StatefulWidget{
@@ -91,13 +92,12 @@ class ConnexionState extends State<Connexion>{
                 });
                 Navigator.push(context, MaterialPageRoute(
                     builder: (context){
-                      return Home();
+                      return AllConversations();
                     }
                 ));
 
 
               }).catchError((error){
-                print(error);
                 Dialogue();
 
               });

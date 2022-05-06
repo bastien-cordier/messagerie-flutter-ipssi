@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:messagerie_ipssi/Model/Message.dart';
 import 'package:messagerie_ipssi/Model/Utilisateur.dart';
+
+import 'package:messagerie_ipssi/Model/Conversation.dart';
 
 class FirestoreHelper {
   final auth = FirebaseAuth.instance;
@@ -31,7 +34,6 @@ class FirestoreHelper {
   //Connexion d'un utlisateur
   Future <Utilisateur> connect(String mail , String password) async {
     UserCredential resultat = await auth.signInWithEmailAndPassword(email: mail, password: password);
-    print(resultat.user);
     String uid = resultat.user!.uid;
     return getProfil(uid);
 
@@ -42,10 +44,28 @@ class FirestoreHelper {
     return  auth.currentUser!.uid;
   }
 
+  Future<Conversation> generateConversation(DocumentSnapshot snapshot) async {
+      Map<String,dynamic> map = snapshot.data() as Map<String,dynamic>;
+      Conversation conversation = Conversation(snapshot);
+      Utilisateur first = await FirestoreHelper().getProfil(map["FIRSTUSER"]);
+      Utilisateur last = await FirestoreHelper().getProfil(map["SECONDUSER"]);
+      Message lastMessage = await FirestoreHelper().getMessage(map["LASTMESSAGE"]);
+      conversation.firstUser = first;
+      conversation.secondUser = last;
+      conversation.lastMessage = lastMessage;
+      return conversation;
+  }
+
   //Fonction a pour de construire une classe profil
   Future <Utilisateur> getProfil(String uid) async{
     DocumentSnapshot snapshot = await fireUser.doc(uid).get();
     return Utilisateur(snapshot);
+  }
+
+  //Fonction a pour de construire une classe profil
+  Future <Message> getMessage(String uid) async{
+    DocumentSnapshot snapshot = await fireMessage.doc(uid).get();
+    return Message(snapshot);
   }
 
   // ajouter un utilisateur dans la base de donnée
