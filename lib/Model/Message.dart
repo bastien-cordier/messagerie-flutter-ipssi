@@ -5,6 +5,7 @@ class Message {
   String from = "";
   String to = "";
   String texte = "";
+  String conversionId = "";
   DateTime envoiMessage = DateTime.now();
 
   Message(DocumentSnapshot snapshot) {
@@ -13,6 +14,7 @@ class Message {
     from = map['FROM'];
     to = map['TO'];
     texte = map['TEXTE'];
+    conversionId = map['CONVERSATION'];
     Timestamp timestamp = map["ENVOIE_MESSAGE"];
     envoiMessage = timestamp.toDate();
   }

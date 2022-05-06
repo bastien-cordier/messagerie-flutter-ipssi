@@ -64,12 +64,12 @@ class AllConversationsState extends State<AllConversations>{
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   child: ListTile(
                     onTap: (){
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context){
-                          return detailConversation(conversation: documents[index]);
-                        }
-                    ));
-                  },
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context){
+                            return detailConversation(conversation: documents[index]);
+                          }
+                      ));
+                    },
                     //Image
                     // leading: ImageRond(image: users.image,size:60),
                     title: Text(title),
