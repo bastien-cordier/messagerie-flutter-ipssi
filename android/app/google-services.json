@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "505804800647",
+    "project_id": "ipssi-messagerie",
+    "storage_bucket": "ipssi-messagerie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505804800647:android:5738fde39adeb74e91ee22",
+        "android_client_info": {
+          "package_name": "com.example.messagerie_ipssi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505804800647-45smq8fmvm01pbec3mogel6ubqdmvg9o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAricKtYGYD8cHIeVTFp0ivWHfOBlgXqyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505804800647-45smq8fmvm01pbec3mogel6ubqdmvg9o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
