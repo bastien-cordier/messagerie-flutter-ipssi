@@ -7,6 +7,7 @@ import 'package:messagerie_ipssi/Controller/inscription.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if ((defaultTargetPlatform == TargetPlatform.iOS) || (defaultTargetPlatform == TargetPlatform.android)){
+    print("android");
     await Firebase.initializeApp();
   }
   else
@@ -22,9 +23,6 @@ void main() async {
         )
     );
   }
-
-
-
   runApp(const MyApp());
 }
 
