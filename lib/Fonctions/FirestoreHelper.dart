@@ -1,10 +1,6 @@
-
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:messagerie_ipssi/Model/Utilisateur.dart';
 
 class FirestoreHelper {
@@ -107,5 +103,4 @@ class FirestoreHelper {
   addConversation(Map<String,dynamic> map,String uid){
     fireConversation.doc(uid).set(map);
   }
-
 }

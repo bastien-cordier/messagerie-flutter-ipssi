@@ -100,5 +100,24 @@
       loadMainDartJs();
     }
   </script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCDnj0hLTn-07p9HyZsTv53gEgJLLlNVt0",
+    authDomain: "ipssi-messagerie.firebaseapp.com",
+    projectId: "ipssi-messagerie",
+    storageBucket: "ipssi-messagerie.appspot.com",
+    messagingSenderId: "505804800647",
+    appId: "1:505804800647:web:ec819357305d7b3991ee22"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 </body>
 </html>
