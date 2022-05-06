@@ -1,4 +1,3 @@
-
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
@@ -40,17 +39,10 @@ class HomeState extends State<Home> {
   Widget bodyPage() {
     return Column(
       children: const [
-        Text(
-          "Bienvenue"
-        ),
-
-        
-
+        Text("Bienvenue"),
 
         //Bouton pour la connexion
-        
       ],
-
     );
   }
 }

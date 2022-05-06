@@ -55,43 +55,36 @@ class AllConversationsState extends State<AllConversations> {
           }
           List documents = snapshot.data!;
           return Container(
-              padding: const EdgeInsets.all(35),
-              child: Column(
-                children: <Widget>[
-                  const Center(
-                    child: Text(
-                      'Mes messages',
+            padding: const EdgeInsets.all(35),
+            child: ListView.builder(
+                itemCount: documents.length,
+                itemBuilder: (context, index) {
+                  String title = documents[index].firstUser.uid ==
+                          FirestoreHelper().getCurrentUserId()
+                      ? documents[index].secondUser.prenom
+                      : documents[index].firstUser.prenom;
+                  return Card(
+                    elevation: 5.0,
+                    color: Colors.grey.shade100,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: ListTile(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return detailConversation(
+                              conversation: documents[index]);
+                        }));
+                      },
+                      //Image
+                      // leading: ImageRond(image: users.image,size:60),
+                      title: Text(title),
+                      trailing: const Icon(Icons.keyboard_arrow_right),
+                      // subtitle: Text("${users.mail}"),
                     ),
-                  ),
-                  ListView.builder(
-                      itemCount: documents.length,
-                      itemBuilder: (context, index) {
-                        String title = documents[index].firstUser.uid ==
-                                FirestoreHelper().getCurrentUserId()
-                            ? documents[index].secondUser.prenom
-                            : documents[index].firstUser.prenom;
-                        return Card(
-                          elevation: 5.0,
-                          color: Colors.amber,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: ListTile(
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return detailConversation(
-                                    conversation: documents[index]);
-                              }));
-                            },
-                            //Image
-                            // leading: ImageRond(image: users.image,size:60),
-                            title: Text(title),
-                            // subtitle: Text("${users.mail}"),
-                          ),
-                        );
-                      }),
-                ],
-              ));
+                  );
+                }),
+          );
         });
   }
 }
